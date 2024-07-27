@@ -22,12 +22,17 @@ class Logger {
      * @function write
      * @description Writes the log details to the specified file.
      * @param {string|object} details - The details to be written in the log file.
-     * @param {string} file - The file path relative to the root log directory.
+     * @param {string} file - The file name to be used for the log file.
      * @returns {void}
      */
     write(details, file) {
-        const logDir = path.join(this.rootDir, path.dirname(file)); // Get the log directory
-        const logFile = path.join(logDir, `${path.basename(file)}.log`); // Get the full log file path
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const date = String(now.getDate()).padStart(2, '0');
+        
+        const logDir = path.join(this.rootDir, year, month, date); // Create directory structure
+        const logFile = path.join(logDir, `${file}.log`); // Get the full log file path
 
         // Ensure the directory exists
         if (!fs.existsSync(logDir)) {
@@ -38,7 +43,7 @@ class Logger {
         const logEntry = typeof details === 'string' ? details : JSON.stringify(details, null, 2);
 
         // Append details to the log file
-        fs.appendFileSync(logFile, `${new Date().toISOString()} - ${logEntry}\n`, 'utf8');
+        fs.appendFileSync(logFile, `${now.toISOString()} - ${logEntry}\n`, 'utf8');
     }
 
     /**

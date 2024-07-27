@@ -1,0 +1,351 @@
+2024-07-27T08:36:31.541Z - [object Object]
+2024-07-27T08:37:23.428Z - [object Object]
+2024-07-27T08:38:13.755Z - [object Object]
+2024-07-27T08:39:39.294Z - {
+  "status": "success",
+  "message": "Email sent successfully",
+  "info": {
+    "accepted": [
+      "jay.chauhan3042@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "HELP",
+      "AUTH LOGIN PLAIN",
+      "SIZE 30000000",
+      "PIPELINING",
+      "8BITMIME",
+      "OK"
+    ],
+    "envelopeTime": 1098,
+    "messageTime": 1129,
+    "messageSize": 34961,
+    "response": "250 XcxisZEsYVmew mail accepted for delivery",
+    "envelope": {
+      "from": "no-reply@dj-jay.in",
+      "to": [
+        "jay.chauhan3042@gmail.com"
+      ]
+    },
+    "messageId": "<ee7c2f6e-284a-f768-74d9-8e90111109d6@dj-jay.in>"
+  }
+}
+2024-07-27T10:06:04.855Z - {
+  "status": "success",
+  "message": "Email sent successfully",
+  "info": {
+    "accepted": [
+      "jay.chauhan3042@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "HELP",
+      "AUTH LOGIN PLAIN",
+      "SIZE 30000000",
+      "PIPELINING",
+      "8BITMIME",
+      "OK"
+    ],
+    "envelopeTime": 1164,
+    "messageTime": 1145,
+    "messageSize": 35041,
+    "response": "250 XeJLsuwhgszNy mail accepted for delivery",
+    "envelope": {
+      "from": "no-reply@dj-jay.in",
+      "to": [
+        "jay.chauhan3042@gmail.com"
+      ]
+    },
+    "messageId": "<33523c02-660f-e755-ef99-4dfce375c33c@dj-jay.in>"
+  }
+}
+2024-07-27T10:19:19.960Z - {
+  "status": "success",
+  "message": "Email sent successfully",
+  "info": {
+    "accepted": [
+      "jay.chauhan3042@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "HELP",
+      "AUTH LOGIN PLAIN",
+      "SIZE 30000000",
+      "PIPELINING",
+      "8BITMIME",
+      "OK"
+    ],
+    "envelopeTime": 1121,
+    "messageTime": 1126,
+    "messageSize": 35041,
+    "response": "250 XeWBs8pCbpEzB mail accepted for delivery",
+    "envelope": {
+      "from": "no-reply@dj-jay.in",
+      "to": [
+        "jay.chauhan3042@gmail.com"
+      ]
+    },
+    "messageId": "<24bd2080-2cf6-fd73-e1fe-ab865c13e8fe@dj-jay.in>"
+  }
+}
+2024-07-27T10:19:54.183Z - {
+  "status": "success",
+  "message": "Email sent successfully",
+  "info": {
+    "accepted": [
+      "jay.chauhan3042@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "HELP",
+      "AUTH LOGIN PLAIN",
+      "SIZE 30000000",
+      "PIPELINING",
+      "8BITMIME",
+      "OK"
+    ],
+    "envelopeTime": 1194,
+    "messageTime": 1162,
+    "messageSize": 35041,
+    "response": "250 XeWjszSMKqxtL mail accepted for delivery",
+    "envelope": {
+      "from": "no-reply@dj-jay.in",
+      "to": [
+        "jay.chauhan3042@gmail.com"
+      ]
+    },
+    "messageId": "<9a439ae4-7aa6-bd1f-f870-a40f0caac40c@dj-jay.in>"
+  }
+}
+2024-07-27T10:20:10.264Z - {
+  "status": "success",
+  "message": "Email sent successfully",
+  "info": {
+    "accepted": [
+      "jay.chauhan3042@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "HELP",
+      "AUTH LOGIN PLAIN",
+      "SIZE 30000000",
+      "PIPELINING",
+      "8BITMIME",
+      "OK"
+    ],
+    "envelopeTime": 1172,
+    "messageTime": 1144,
+    "messageSize": 35041,
+    "response": "250 XeWzsjMMi5nw9 mail accepted for delivery",
+    "envelope": {
+      "from": "no-reply@dj-jay.in",
+      "to": [
+        "jay.chauhan3042@gmail.com"
+      ]
+    },
+    "messageId": "<5476e439-8b25-facb-f2c8-09837a0d915c@dj-jay.in>"
+  }
+}
+2024-07-27T10:21:45.430Z - {
+  "status": "success",
+  "message": "Email sent successfully",
+  "info": {
+    "accepted": [
+      "jay.chauhan3042@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "HELP",
+      "AUTH LOGIN PLAIN",
+      "SIZE 30000000",
+      "PIPELINING",
+      "8BITMIME",
+      "OK"
+    ],
+    "envelopeTime": 1116,
+    "messageTime": 1141,
+    "messageSize": 35041,
+    "response": "250 XeYWsZj2Vu3RH mail accepted for delivery",
+    "envelope": {
+      "from": "no-reply@dj-jay.in",
+      "to": [
+        "jay.chauhan3042@gmail.com"
+      ]
+    },
+    "messageId": "<28cb9403-c35d-a00c-35ba-1e935c5ed99d@dj-jay.in>"
+  }
+}
+2024-07-27T10:22:45.527Z - {
+  "status": "success",
+  "message": "Email sent successfully",
+  "info": {
+    "accepted": [
+      "jay.chauhan3042@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "HELP",
+      "AUTH LOGIN PLAIN",
+      "SIZE 30000000",
+      "PIPELINING",
+      "8BITMIME",
+      "OK"
+    ],
+    "envelopeTime": 1156,
+    "messageTime": 1154,
+    "messageSize": 35041,
+    "response": "250 XeZUsXtXYcxpf mail accepted for delivery",
+    "envelope": {
+      "from": "no-reply@dj-jay.in",
+      "to": [
+        "jay.chauhan3042@gmail.com"
+      ]
+    },
+    "messageId": "<7219dba6-f88a-e283-a3f0-882317276b91@dj-jay.in>"
+  }
+}
+2024-07-27T10:24:31.252Z - {
+  "status": "success",
+  "message": "Email sent successfully",
+  "info": {
+    "accepted": [
+      "jay.chauhan3042@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "HELP",
+      "AUTH LOGIN PLAIN",
+      "SIZE 30000000",
+      "PIPELINING",
+      "8BITMIME",
+      "OK"
+    ],
+    "envelopeTime": 1126,
+    "messageTime": 1130,
+    "messageSize": 35041,
+    "response": "250 XebCsvsYpmwRC mail accepted for delivery",
+    "envelope": {
+      "from": "no-reply@dj-jay.in",
+      "to": [
+        "jay.chauhan3042@gmail.com"
+      ]
+    },
+    "messageId": "<8f0b6424-e308-f72a-c725-ade420b8a1ce@dj-jay.in>"
+  }
+}
+2024-07-27T10:58:52.996Z - {
+  "status": "success",
+  "message": "Email sent successfully",
+  "info": {
+    "accepted": [
+      "jay.chauhan3042@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "HELP",
+      "AUTH LOGIN PLAIN",
+      "SIZE 30000000",
+      "PIPELINING",
+      "8BITMIME",
+      "OK"
+    ],
+    "envelopeTime": 1153,
+    "messageTime": 1140,
+    "messageSize": 35041,
+    "response": "250 Xf8SsKHH6T7r3 mail accepted for delivery",
+    "envelope": {
+      "from": "no-reply@dj-jay.in",
+      "to": [
+        "jay.chauhan3042@gmail.com"
+      ]
+    },
+    "messageId": "<61351871-f85e-0159-3e1b-979ca36cec7e@dj-jay.in>"
+  }
+}
+2024-07-27T11:26:26.073Z - {
+  "status": "success",
+  "message": "Email sent successfully",
+  "info": {
+    "accepted": [
+      "jay.chauhan3042@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "HELP",
+      "AUTH LOGIN PLAIN",
+      "SIZE 30000000",
+      "PIPELINING",
+      "8BITMIME",
+      "OK"
+    ],
+    "envelopeTime": 1141,
+    "messageTime": 1129,
+    "messageSize": 35041,
+    "response": "250 XfZ7s99xypEzB mail accepted for delivery",
+    "envelope": {
+      "from": "no-reply@dj-jay.in",
+      "to": [
+        "jay.chauhan3042@gmail.com"
+      ]
+    },
+    "messageId": "<f4182700-fdd6-e598-7f13-449b89336289@dj-jay.in>"
+  }
+}
+2024-07-27T12:29:47.432Z - {
+  "status": "success",
+  "message": "Email sent successfully",
+  "info": {
+    "accepted": [
+      "jay.chauhan3042@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "HELP",
+      "AUTH LOGIN PLAIN",
+      "SIZE 30000000",
+      "PIPELINING",
+      "8BITMIME",
+      "OK"
+    ],
+    "envelopeTime": 1166,
+    "messageTime": 1159,
+    "messageSize": 35041,
+    "response": "250 XgYQsaW6wwhyB mail accepted for delivery",
+    "envelope": {
+      "from": "no-reply@dj-jay.in",
+      "to": [
+        "jay.chauhan3042@gmail.com"
+      ]
+    },
+    "messageId": "<be5d8ceb-7763-0dfc-9fd3-aee7a618232b@dj-jay.in>"
+  }
+}
+2024-07-27T12:34:36.019Z - {
+  "status": "success",
+  "message": "Email sent successfully",
+  "info": {
+    "accepted": [
+      "jay.chauhan3042@gmail.com"
+    ],
+    "rejected": [],
+    "ehlo": [
+      "HELP",
+      "AUTH LOGIN PLAIN",
+      "SIZE 30000000",
+      "PIPELINING",
+      "8BITMIME",
+      "OK"
+    ],
+    "envelopeTime": 1122,
+    "messageTime": 1127,
+    "messageSize": 35041,
+    "response": "250 Xgd5swZ0pmwRC mail accepted for delivery",
+    "envelope": {
+      "from": "no-reply@dj-jay.in",
+      "to": [
+        "jay.chauhan3042@gmail.com"
+      ]
+    },
+    "messageId": "<6ad667ad-0b14-a20a-aed2-8ea536a53313@dj-jay.in>"
+  }
+}

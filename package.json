@@ -1,0 +1,19 @@
+{
+  "name": "admin-server",
+  "version": "1.0.0",
+  "description": "This is the admin control panel for the greate developer Jay Chauhan.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index"
+  },
+  "author": "Jay Chauhan",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "imap-simple": "^5.1.0",
+    "mysql2": "^3.10.3",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.14"
+  }
+}

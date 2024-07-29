@@ -5,7 +5,7 @@ require('dotenv').config();  // Loading environment variables from a .env file
 /**
  * @class MySQL
  * @description A class to handle MySQL database operations using a fluent interface.
- * @author Jay Chauhan
+ * @uthor Jay Chauhan
  */
 class MySQL {
     /**
@@ -14,7 +14,7 @@ class MySQL {
      */
     constructor() {
         this.connection = null;  // Holds the database connection
-        this.queryParts = this.#resetState();
+        this.queryParts = this.#resetState();  // Initialize query parts
         this.lastQuery = '';  // Holds the last executed query
     }
 
@@ -32,6 +32,7 @@ class MySQL {
             orWhere: [],  // OR Where conditions
             groupBy: '',  // Group By statement
             orderBy: '',  // Order By statement
+            limit: '',  // Limit statement
             values: []  // Values for prepared statements
         };
     }
@@ -147,9 +148,20 @@ class MySQL {
     }
 
     /**
+     * @function limit
+     * @description Adds a LIMIT clause to the query.
+     * @param {number} limit - The number of rows to limit.
+     * @returns {MySQL}
+     */
+    limit(limit) {
+        this.queryParts.limit = `LIMIT ${limit}`;
+        return this;
+    }
+
+    /**
      * @function #execute
      * @description Executes the given query with provided values and resets the query parts.
-     * @public
+     * @private
      * @param {string} query - The SQL query to execute.
      * @param {Array} values - The values for the prepared statement.
      * @returns {Promise<Array>}
@@ -171,7 +183,7 @@ class MySQL {
     }
 
     /**
-     * @function selectQuery
+     * @function get
      * @description Builds and executes a SELECT query based on the accumulated query parts.
      * @returns {Promise<Array>}
      */
@@ -182,17 +194,18 @@ class MySQL {
         if (this.queryParts.orWhere.length) query += ` OR ${this.queryParts.orWhere.join(' OR ')}`;
         if (this.queryParts.groupBy) query += ` ${this.queryParts.groupBy}`;
         if (this.queryParts.orderBy) query += ` ${this.queryParts.orderBy}`;
+        if (this.queryParts.limit) query += ` ${this.queryParts.limit}`;
 
         return await this.#execute(query, this.queryParts.values);
     }
 
     /**
-     * @function selectQuery
-     * @description Builds and executes a SELECT query based on the accumulated query parts returns the first row.
+     * @function first
+     * @description Builds and executes a SELECT query based on the accumulated query parts and returns the first row.
      * @returns {Promise<Object>}
      */
     async first() {
-        return (await this.get())[0];
+        return (await this.limit(1).get())[0];
     }
 
     /**

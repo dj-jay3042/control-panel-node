@@ -158,7 +158,7 @@ class LoginController {
      * @param {Response} res - The Express response object.
      * @returns {Promise<void>}
      */
-    static async sendVerification(req, res) {
+    static async sendVerificationMail(req, res) {
         const email = new Mail();
         const db = new MySQL();
 

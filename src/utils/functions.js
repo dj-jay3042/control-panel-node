@@ -7,10 +7,10 @@ async function getUserByToken(token) {
     const user = await db.table("tblUsers")
         .select("userAccessToken", "userRefreshToken", "userEmail")
         .where("userAccessToken", token)
-        .get();
+        .first();
 
     await db.disconnect();
-    return user[0];
+    return user;
 }
 
 module.exports = {

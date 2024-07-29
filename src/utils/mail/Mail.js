@@ -1,5 +1,5 @@
 const Email = require('./Mailer');
-const Logger = require('../log/Logger');
+const Logger = require('../logs/Logger');
 const MySQL = require('../db/Mysql');
 const tables = require('../../config/tables');
 require('dotenv').config();

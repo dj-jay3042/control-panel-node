@@ -1,4 +1,4 @@
-const Logger = require("../utils/log/Logger");
+const Logger = require("../utils/logs/Logger");
 
 function generalErrorHandler(err, req, res, next) {
     const logger = new Logger();

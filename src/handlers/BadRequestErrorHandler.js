@@ -1,4 +1,4 @@
-const Logger = require("../utils/log/Logger");
+const Logger = require("../utils/logs/Logger");
 
 function jsonErrorHandler(err, req, res, next) {
     if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {

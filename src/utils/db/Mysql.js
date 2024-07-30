@@ -97,6 +97,17 @@ class MySQL {
     }
 
     /**
+     * @function rawWhere
+     * @description Adds a WHERE condition to the query.
+     * @param {string} rawWhere - raw query.
+     * @returns {MySQL}
+     */
+    rawWhere(rawWhere) {
+        this.queryParts.where.push(`${rawWhere}`);
+        return this;
+    }
+
+    /**
      * @function where
      * @description Adds a WHERE condition to the query.
      * @param {string} column - The column for the condition.

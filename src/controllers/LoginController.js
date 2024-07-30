@@ -50,7 +50,7 @@ class LoginController {
                     // Verify user based on OTP or login key
                     if (verificationData) {
                         if (await LoginController.#verifyUser(verificationData, loginData, db)) {
-                            res.status(200).json({ message: `Welcome ${user.userFirstName} ${user.userLastName}`, accessKey: user.userAccessToken, refreshKey: user.userRefreshToken });
+                            res.status(200).json({ message: `Welcome ${user.userFirstName} ${user.userLastName}`, accessToken: user.userAccessToken, refreshToken: user.userRefreshToken });
                         } else {
                             res.status(401).json({ message: 'Invalid OTP' });
                         }
@@ -133,7 +133,7 @@ class LoginController {
                     };
                     await db.table(tables.TBL_USER_VERIFICATION_DETAILS).insert(loginKeyVerificationData);
 
-                    res.status(200).json({ message: 'OTP sent successfully', loginKey: loginKey });
+                    res.status(200).json({ message: 'OTP sent successfully', loginKey: loginKey, otpSent: true });
                 } else {
                     res.status(401).json({ message: 'Invalid credentials' });
                 }

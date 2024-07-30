@@ -1,10 +1,15 @@
 const express = require('express');
+const cors = require('cors');
+
 const router = express.Router();
 
 const privateRoutes = require('./privateRoutes');
 const publicRoutes = require('./publicRoutes');
 const jsonErrorHandler = require('../handlers/BadRequestErrorHandler');
 const generalErrorHandler = require('../handlers/ServerErrorHandler');
+
+// Use CORS middleware
+router.use(cors());
 
 // Middleware to parse JSON bodies
 router.use(express.json());

@@ -6,6 +6,8 @@ const Logger = require('../utils/logs/Logger'); // Import the Logger utility for
  * @class DataController
  * @description Controller class for handling data-related operations such as fetching visits, bot visits, visitor OS, and bank balance.
  *              This class contains static methods that interact with the database and handle HTTP requests and responses.
+ * @version 1.0.0
+ * @date 2024-07-30
  * @author Jay Chauhan
  */
 class DataController {
@@ -15,6 +17,8 @@ class DataController {
      * @description Fetches the latest 10 days of visit counts from the database and returns them in the response.
      * @param {Object} req - Express request object
      * @param {Object} res - Express response object
+     * @returns {void}
+     * @memberof DataController
      */
     static async getVisits(req, res) {
         const db = new MySQL(); // Create a new instance of the MySQL utility
@@ -30,7 +34,7 @@ class DataController {
                 .limit(10)
                 .get();
 
-            res.status(200).json({ visits }); // Send the visits data as a JSON response
+            res.status(200).json(visits); // Send the visits data as a JSON response
         } catch (error) {
             const logger = new Logger(); // Create a new instance of the Logger utility
             logger.write("Error in getting visits: " + error, "data/error"); // Log the error
@@ -45,6 +49,8 @@ class DataController {
      * @description Fetches the latest 10 days of bot visit counts from the database and returns them in the response.
      * @param {Object} req - Express request object
      * @param {Object} res - Express response object
+     * @returns {void}
+     * @memberof DataController
      */
     static async getBotVisits(req, res) {
         const db = new MySQL(); // Create a new instance of the MySQL utility
@@ -62,10 +68,10 @@ class DataController {
                 .limit(10)
                 .get();
 
-            res.status(200).json({ visits }); // Send the bot visits data as a JSON response
+            res.status(200).json(visits); // Send the bot visits data as a JSON response
         } catch (error) {
             const logger = new Logger(); // Create a new instance of the Logger utility
-            logger.write("Error in getting visits: " + error, "data/error"); // Log the error
+            logger.write("Error in getting bot visits: " + error, "data/error"); // Log the error
             res.status(500).json({ message: 'Oops! Something went wrong!' }); // Send an error response
         } finally {
             await db.disconnect(); // Disconnect from the database
@@ -77,6 +83,8 @@ class DataController {
      * @description Fetches the counts of visitors grouped by operating system and returns the percentage distribution in the response.
      * @param {Object} req - Express request object
      * @param {Object} res - Express response object
+     * @returns {void}
+     * @memberof DataController
      */
     static async getVisitorOs(req, res) {
         const db = new MySQL(); // Create a new instance of the MySQL utility
@@ -86,7 +94,7 @@ class DataController {
 
             // Query the visitor OS data
             const visitorsOs = await db.table(tables.TBL_VISITORS)
-                .select('os', db.raw('count(*) as count'))
+                .select('os', 'count(*) as count')
                 .groupBy('os')
                 .get();
 
@@ -113,7 +121,7 @@ class DataController {
             res.status(200).json(returnData); // Send the OS percentage distribution as a JSON response
         } catch (error) {
             const logger = new Logger(); // Create a new instance of the Logger utility
-            logger.write("Error in getting visitors os: " + error, "data/error"); // Log the error
+            logger.write("Error in getting visitors OS: " + error, "data/error"); // Log the error
             res.status(500).json({ message: 'Oops! Something went wrong!' }); // Send an error response
         } finally {
             await db.disconnect(); // Disconnect from the database
@@ -125,6 +133,8 @@ class DataController {
      * @description Fetches the total bank balance for active accounts from the database and returns it in the response.
      * @param {Object} req - Express request object
      * @param {Object} res - Express response object
+     * @returns {void}
+     * @memberof DataController
      */
     static async getBankBalance(req, res) {
         const db = new MySQL(); // Create a new instance of the MySQL utility

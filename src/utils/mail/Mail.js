@@ -1,13 +1,13 @@
-const Email = require('./Mailer');
-const Logger = require('../logs/Logger');
-const MySQL = require('../db/Mysql');
-const tables = require('../../config/tables');
-require('dotenv').config();
+const Email = require('./Mailer');  // Import Email class for sending emails
+const Logger = require('../logs/Logger');  // Import Logger class for logging
+const MySQL = require('../db/Mysql');  // Import MySQL class for database operations
+const tables = require('../../config/tables');  // Import table configurations
+require('dotenv').config();  // Load environment variables
 
 /**
  * @class Mail
  * @description A class to provide service for sending, receiving, and replying to emails using Email Class.
- * @uthor Jay Chauhan
+ * @author Jay Chauhan
  */
 class Mail {
     /**
@@ -36,14 +36,24 @@ class Mail {
             subject: subject,
             html: content,
         }
-        const mailResponse = await this.emailProvider.sendMail(mailDetails);
+        const mailResponse = await this.emailProvider.sendMail(mailDetails);  // Send email
 
         // Log the email response based on the status
         if (mailResponse.status == "success") {
-            this.logger.write(mailResponse, "email/success");
+            this.logger.write(mailResponse, "email/success");  // Log success response
+            const sentEmailDetails = {
+                mailMessageId: mailResponse.info.messageId,
+                mailFrom: mailDetails.from || process.env.MAIL_FROM_ADDRESS,
+                mailTo: mailDetails.to,
+                mailBody: mailDetails.html,
+                mailType: "1"
+            };
+            await this.db.connect();  // Connect to the database
+            await this.db.table(tables.TBL_MAILS).insert(sentEmailDetails);  // Insert the email details
+            this.db.disconnect();  // Disconnect from the database
             return true;
         } else {
-            this.logger.write(mailResponse, "email/error");
+            this.logger.write(mailResponse, "email/error");  // Log error response
             return false;
         }
     }
@@ -58,13 +68,13 @@ class Mail {
      * @returns {Promise<boolean>} - Returns true if the email was sent successfully, otherwise false.
      */
     async sendEmailTemplate(templateId, templateData, to, from = null) {
-        const template = await this.getTemplate(templateId);
+        const template = await this.getTemplate(templateId);  // Retrieve the template
         if (!template) {
-            this.logger.write(`Failed to send email template: Template not found for ID ${templateId}`, "email/templateError");
+            this.logger.write(`Failed to send email template: Template not found for ID ${templateId}`, "email/templateError");  // Log error if template not found
             return false;
         }
-        const content = this.renderTemplate(template, templateData);
-        return await this.send(from || process.env.MAIL_USER, to, template.templateSubject, content);
+        const content = this.renderTemplate(template, templateData);  // Render the template with data
+        return await this.send(from || process.env.MAIL_USER, to, templateData.subject || template.templateSubject, content);  // Send the email
     }
 
     /**
@@ -79,8 +89,9 @@ class Mail {
             .select("templateSubject", "templateBody")
             .where("templateId", templateId)
             .where("templateIsActive", "1")
-            .first();
-        return template;  // Return the first template found
+            .first();  // Retrieve the first active template matching the ID
+        this.db.disconnect();  // Disconnect from the database
+        return template;  // Return the template object
     }
 
     /**
@@ -92,9 +103,9 @@ class Mail {
      */
     renderTemplate(template, templateData) {
         return template.templateBody.replace(/\{\{\s*mailBodyData\.([a-zA-Z0-9_]+)\s*\}\}/g, (match, p1) => {
-            return templateData[p1] !== undefined ? templateData[p1] : match;
+            return templateData[p1] !== undefined ? templateData[p1] : match;  // Replace placeholders with data
         });
     }
 }
 
-module.exports = Mail;
+module.exports = Mail;  // Export the Mail class

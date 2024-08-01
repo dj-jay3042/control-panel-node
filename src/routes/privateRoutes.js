@@ -3,6 +3,7 @@ const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware');
 const DataController = require('../controllers/DataController');
 const RoutesController = require('../controllers/RoutesController');
+const MailController = require('../controllers/MailController');
 
 /*********************************************************************************************
  * Private routes 
@@ -19,5 +20,8 @@ router.get("/dashboard/getBankBalance", DataController.getBankBalance);
 
 // MenuItems routes
 router.post("/getMenuItems", RoutesController.getMenuItems);
+
+// Mail routes
+router.post("/email/sendEmail", MailController.sendEmail);
 
 module.exports = router;

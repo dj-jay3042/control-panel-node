@@ -39,7 +39,7 @@ class SmsController {
 
     static async receiveSms(req, res) {
         const logger = new Logger(); // Create a new instance of the Logger utility
-        logger.write("Getting sms: " + JSON.stringify(req), "sms/receive"); // Log the smsent
+        logger.write("Getting sms: " + JSON.stringify(req.body), "sms/receive"); // Log the smsent
         res.status(200).json({ message: 'Sms imported successfully!' }); // Send an response
     }
 

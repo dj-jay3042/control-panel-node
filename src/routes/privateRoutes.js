@@ -28,7 +28,4 @@ router.post("/email/sendEmail", MailController.sendEmail);
 // Sms routes [FRONTEND DATA GETTING API]
 router.get("/sms/getSms", SmsController.getSms);
 
-// Sms import [BACKEND DATA RETRIVING API]
-router.post("/sms/receiveSms", SmsController.receiveSms);
-
 module.exports = router;

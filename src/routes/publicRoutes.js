@@ -18,4 +18,7 @@ router.get('/verifyEmail/:token', LoginController.verifyEmail);
 // React Routes
 router.get('/routes', RoutesController.getRoutes);
 
+// Sms import [BACKEND DATA RETRIVING API]
+router.post("/sms/receiveSms", SmsController.receiveSms);
+
 module.exports = router;

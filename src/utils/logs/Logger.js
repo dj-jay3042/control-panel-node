@@ -10,12 +10,7 @@ require('dotenv').config();
  */
 class Logger {
     constructor() {
-        this.rootDir = path.resolve(__dirname, process.env.LOG_ROOT_DIR || '../../log'); // Use relative path within project
-
-        // Schedule log cleanup every day at midnight
-        cron.schedule('0 0 * * *', () => {
-            this.cleanupLogs();
-        });
+        this.rootDir = path.resolve(__dirname, process.env.LOG_ROOT_DIR || '../../log'); // Use relative path within projectss
     }
 
     /**

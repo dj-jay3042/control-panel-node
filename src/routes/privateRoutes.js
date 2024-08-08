@@ -6,6 +6,7 @@ const SmsRoutes = require('./privateRoutes/SmsRoutes');
 const MenuRoutes = require('./privateRoutes/MenuRoutes');
 const EmailRoutes = require('./privateRoutes/EmailRoutes');
 const WhatsappRoutes = require('./privateRoutes/WhatsappRoutes');
+const Logger = require('../utils/logs/Logger');
 
 /*********************************************************************************************
  * Private routes 
@@ -28,6 +29,13 @@ router.use("/email", EmailRoutes);
 
 // Whatsapp routes
 router.use("/whatsapp", WhatsappRoutes);
+
+// Clean Logs
+router.post("/clearLogs", (req, res) => {
+    const logger = new Logger();
+    logger.cleanupLogs();
+    res.status(200).json({ message: "Logs cleaned up successfully" });
+});
 
 // Export Private Router
 module.exports = router;

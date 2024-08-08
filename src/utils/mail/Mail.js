@@ -43,8 +43,8 @@ class Mail {
             this.logger.write(mailResponse, "email/success");  // Log success response
             const sentEmailDetails = {
                 mailMessageId: mailResponse.info.messageId,
-                mailFrom: mailDetails.from || process.env.MAIL_FROM_ADDRESS,
-                mailTo: mailDetails.to,
+                mailFromEmail: mailDetails.from || process.env.MAIL_FROM_ADDRESS,
+                mailToEmail: mailDetails.to,
                 mailBody: mailDetails.html,
                 mailType: "1"
             };

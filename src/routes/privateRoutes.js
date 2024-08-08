@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware');
-const DataController = require('../controllers/DataController');
+const DashboardRoutes = require('./DashboardRoutes');
 const RoutesController = require('../controllers/RoutesController');
 const MailController = require('../controllers/MailController');
 const SmsController = require('../controllers/SmsController');
@@ -14,11 +14,7 @@ const WhatsappController = require('../controllers/WhatsappController');
 // Protected routes
 router.use(authMiddleware);
 
-// Dashboard routes
-router.get("/dashboard/getVisits", DataController.getVisits);
-router.get("/dashboard/getBotVisits", DataController.getBotVisits);
-router.get("/dashboard/getVisitorOs", DataController.getVisitorOs);
-router.get("/dashboard/getBankBalance", DataController.getBankBalance);
+router.use(DashboardRoutes);
 
 // MenuItems routes
 router.post("/getMenuItems", RoutesController.getMenuItems);

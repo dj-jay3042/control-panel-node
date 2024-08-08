@@ -1,12 +1,14 @@
-const MySQL = require('../utils/db/Mysql');
-const Mail = require('../utils/mail/Mail');
-const tables = require('../config/tables');
-const crypto = require('crypto');
-const Logger = require('../utils/logs/Logger');
+const MySQL = require('../utils/db/Mysql'); // Import the MySQL utility for database operations
+const Mail = require('../utils/mail/Mail'); // Import the Mail utility for sending emails
+const tables = require('../config/tables'); // Import table configurations
+const crypto = require('crypto'); // Import the crypto module for generating secure OTP and hashes
+const Logger = require('../utils/logs/Logger'); // Import the Logger utility for logging
 
 /**
  * @class LoginController
  * @description Controller class for handling login, OTP sending, and email verification.
+ * @version 1.0.0
+ * @date 2024-07-30
  * @author Jay Chauhan
  */
 class LoginController {
@@ -18,13 +20,13 @@ class LoginController {
      * @returns {Promise<void>}
      */
     static async login(req, res) {
-        const db = new MySQL();
+        const db = new MySQL(); // Create a new instance of the MySQL utility
         try {
             const loginData = {
-                username: req.body.username,
-                password: req.body.password,
-                otp: req.body.otp,
-                loginKey: req.headers.loginkey
+                username: req.body.username, // Get the username from the request body
+                password: req.body.password, // Get the password from the request body
+                otp: req.body.otp, // Get the OTP from the request body
+                loginKey: req.headers.loginkey // Get the login key from the request headers
             };
 
             // Connect to the database
@@ -64,7 +66,7 @@ class LoginController {
                 res.status(404).json({ message: 'User not found' });
             }
         } catch (error) {
-            const logger = new Logger();
+            const logger = new Logger(); // Create a new instance of the Logger utility
             // Log the error
             logger.write("Error in Login: " + error, "login/error");
             res.status(500).json({ message: 'Oops! Something went wrong!' });
@@ -82,13 +84,13 @@ class LoginController {
      * @returns {Promise<void>}
      */
     static async sendOtp(req, res) {
-        const email = new Mail();
-        const db = new MySQL();
+        const email = new Mail(); // Create a new instance of the Mail utility
+        const db = new MySQL(); // Create a new instance of the MySQL utility
 
         try {
             const inputData = {
-                username: req.body.username,
-                password: req.body.password
+                username: req.body.username, // Get the username from the request body
+                password: req.body.password // Get the password from the request body
             };
 
             // Connect to the database
@@ -103,7 +105,7 @@ class LoginController {
             // Check if user exists and password is correct
             if (user) {
                 if (LoginController.#sha1(inputData.password) === user.userPassword) {
-                    const otp = LoginController.#generateOtp();
+                    const otp = LoginController.#generateOtp(); // Generate an OTP
                     const templateData = {
                         loginId: user.userLogin,
                         otp: otp
@@ -141,7 +143,7 @@ class LoginController {
                 res.status(404).json({ message: 'User not found' });
             }
         } catch (error) {
-            const logger = new Logger();
+            const logger = new Logger(); // Create a new instance of the Logger utility
             // Log the error
             logger.write("Error in sendOtp: " + error, "login/error");
             res.status(500).json({ message: 'Oops! Something went wrong!' });
@@ -152,21 +154,21 @@ class LoginController {
     }
 
     /**
-     * @function sendVerification
+     * @function sendVerificationMail
      * @description Sends a verification email with a verification token to the user's email.
      * @param {Request} req - The Express request object.
      * @param {Response} res - The Express response object.
      * @returns {Promise<void>}
      */
     static async sendVerificationMail(req, res) {
-        const email = new Mail();
-        const db = new MySQL();
+        const email = new Mail(); // Create a new instance of the Mail utility
+        const db = new MySQL(); // Create a new instance of the MySQL utility
 
         try {
             // Connect to the database
             await db.connect();
 
-            const emailId = req.body.email;
+            const emailId = req.body.email; // Get the email ID from the request body
 
             // Query user information from the database
             const user = await db.table(tables.TBL_USERS)
@@ -188,7 +190,7 @@ class LoginController {
                     verificationStatus: "1",
                 };
                 if (await db.table(tables.TBL_USER_VERIFICATION_DETAILS).insert(verificationData)) {
-                    const emailResponse = await email.sendEmailTemplate(2, { emailVerificationLink: verificationToken }, emailId);
+                    const emailResponse = await email.sendEmailTemplate(2, { emailVerificationLink: verificationToken }, emailId); // Send verification email
                     if (emailResponse.status == "success") {
                         res.status(200).json({ message: 'Verification link sent successfully' });
                     } else {
@@ -201,7 +203,7 @@ class LoginController {
                 res.status(404).json({ message: 'Please enter registered email!' });
             }
         } catch (error) {
-            const logger = new Logger();
+            const logger = new Logger(); // Create a new instance of the Logger utility
             // Log the error
             logger.write("Error in EmailVerificationLink: " + error, "login/error");
             res.status(500).json({ message: 'Oops! Something went wrong!' });
@@ -219,13 +221,13 @@ class LoginController {
      * @returns {Promise<void>}
      */
     static async verifyEmail(req, res) {
-        const db = new MySQL();
+        const db = new MySQL(); // Create a new instance of the MySQL utility
 
         try {
             // Connect to the database
             await db.connect();
 
-            const emailToken = req.params.token;
+            const emailToken = req.params.token; // Get the verification token from the request parameters
 
             // Query user information from the database using the verification token
             const user = await db.table(tables.TBL_USERS + " u")
@@ -250,13 +252,13 @@ class LoginController {
                     if (await db.table(tables.TBL_USER_VERIFICATION_DETAILS).where("verificationValue", emailToken).update(verificationDetailsUpdate)) {
                         res.status(200).json({ message: 'Email verified successfully' });
                     } else {
-                        const logger = new Logger();
+                        const logger = new Logger(); // Create a new instance of the Logger utility
                         // Log the error
                         logger.write("Error in updating verification status: " + user.userId, "login/error");
                         res.status(200).json({ message: 'Email verified successfully' });
                     }
                 } else {
-                    const logger = new Logger();
+                    const logger = new Logger(); // Create a new instance of the Logger utility
                     // Log the error
                     logger.write("Error in updating user status: " + user.userId, "login/error");
                     res.status(500).json({ message: 'Failed to verify the email!' });
@@ -265,7 +267,7 @@ class LoginController {
                 res.status(404).json({ message: 'Verification link expired!' });
             }
         } catch (error) {
-            const logger = new Logger();
+            const logger = new Logger(); // Create a new instance of the Logger utility
             // Log the error
             logger.write("Error in EmailVerification: " + error, "login/error");
             res.status(500).json({ message: 'Oops! Something went wrong!' });
@@ -329,4 +331,4 @@ class LoginController {
     }
 }
 
-module.exports = LoginController;
+module.exports = LoginController; // Export the LoginController class

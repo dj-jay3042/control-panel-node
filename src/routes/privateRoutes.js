@@ -1,34 +1,33 @@
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware');
-const DashboardRoutes = require('./DashboardRoutes');
-const RoutesController = require('../controllers/RoutesController');
-const MailController = require('../controllers/MailController');
-const SmsController = require('../controllers/SmsController');
-const WhatsappController = require('../controllers/WhatsappController');
+const DashboardRoutes = require('./privateRoutes/DashboardRoutes');
+const SmsRoutes = require('./privateRoutes/SmsRoutes');
+const MenuRoutes = require('./privateRoutes/MenuRoutes');
+const EmailRoutes = require('./privateRoutes/EmailRoutes');
+const WhatsappRoutes = require('./privateRoutes/WhatsappRoutes');
 
 /*********************************************************************************************
  * Private routes 
  *********************************************************************************************/
 
-// Protected routes
+// Authentication Middleware To Velidate The Request
 router.use(authMiddleware);
 
-router.use(DashboardRoutes);
+// Dashboard routes
+router.use("/dashboard", DashboardRoutes);
 
-// MenuItems routes
-router.post("/getMenuItems", RoutesController.getMenuItems);
+// Sms routes
+router.use("/sms", SmsRoutes);
 
-// Mail routes
-router.post("/email/sendEmail", MailController.sendEmail);
+// Menu routes
+router.use("/menu", MenuRoutes);
 
-// Sms routes [FRONTEND DATA GETTING API]
-router.get("/sms/getSms", SmsController.getSms);
+// Email routes
+router.use("/email", EmailRoutes);
 
-// Sms import [BACKEND DATA RETRIVING API]
-router.post("/sms/receiveSms", SmsController.receiveSms);
+// Whatsapp routes
+router.use("/whatsapp", WhatsappRoutes);
 
-// Whatsapp messages
-router.post("/whatsapp/send", WhatsappController.sendMessage);
-
+// Export Private Router
 module.exports = router;

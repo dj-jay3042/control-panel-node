@@ -13,8 +13,5 @@ router.get("/getBotVisits", DataController.getBotVisits);
 // Get Visitor's Os Details
 router.get("/getVisitorOs", DataController.getVisitorOs);
 
-// Get Bank Balance
-router.get("/getBankBalance", DataController.getBankBalance);
-
 // Export Router
 module.exports = router;

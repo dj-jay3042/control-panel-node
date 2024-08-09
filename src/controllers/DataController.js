@@ -127,36 +127,6 @@ class DataController {
             await db.disconnect(); // Disconnect from the database
         }
     }
-
-    /**
-     * @function getBankBalance
-     * @description Fetches the total bank balance for active accounts from the database and returns it in the response.
-     * @param {Object} req - Express request object
-     * @param {Object} res - Express response object
-     * @returns {void}
-     * @memberof DataController
-     */
-    static async getBankBalance(req, res) {
-        const db = new MySQL(); // Create a new instance of the MySQL utility
-
-        try {
-            await db.connect(); // Connect to the database
-
-            // Query to get the total bank balance for active accounts
-            const balanceData = await db.table(tables.TBL_BANK_DETAILS)
-                .select("SUM(bankAccountBalance) as totalBalance")
-                .where("bankAccountIsActive", "1")
-                .first();
-
-            res.status(200).json({ bankBalance: balanceData.totalBalance }); // Send the total bank balance as a JSON response
-        } catch (error) {
-            const logger = new Logger(); // Create a new instance of the Logger utility
-            logger.write("Error in getting bank balance: " + error, "data/error"); // Log the error
-            res.status(500).json({ message: 'Oops! Something went wrong!' }); // Send an error response
-        } finally {
-            await db.disconnect(); // Disconnect from the database
-        }
-    }
 }
 
 module.exports = DataController; // Export the DataController class

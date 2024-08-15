@@ -7,6 +7,7 @@ const MenuRoutes = require('./privateRoutes/MenuRoutes');
 const EmailRoutes = require('./privateRoutes/EmailRoutes');
 const WhatsappRoutes = require('./privateRoutes/WhatsappRoutes');
 const MoneyRoutes = require('./privateRoutes/MoneyRoutes');
+const EventRoutes = require('./privateRoutes/EventRoutes');
 const Logger = require('../utils/logs/Logger');
 
 /*********************************************************************************************
@@ -33,6 +34,9 @@ router.use("/whatsapp", WhatsappRoutes);
 
 // Money routes
 router.use("/money", MoneyRoutes);
+
+// Money routes
+router.use("/event", EventRoutes);
 
 // Clean Logs
 router.post("/clearLogs", (req, res) => {

@@ -6,7 +6,7 @@ require('dotenv').config();
 /**
  * @class Logger
  * @description A class to provide logging services for the application.
- * @uthor Jay Chauhan
+ * @author Jay Chauhan
  */
 class Logger {
     constructor() {

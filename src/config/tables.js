@@ -20,7 +20,8 @@ const tables = {
     TBL_USERS: "tblUsers",
     TBL_VISITORS: "tblVisitors",
     TBL_WHATSAPP_CLIENTS: "tblWhatsappClients",
-    TBL_WHATSAPP_TEMPLATES: "tblWhatsappTemplates"
+    TBL_WHATSAPP_TEMPLATES: "tblWhatsappTemplates",
+    TBL_EVENTS: "tblEvents"
 };
 
 module.exports = tables;

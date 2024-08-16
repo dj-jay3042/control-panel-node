@@ -59,7 +59,7 @@ class Event {
                     },
                     data: dataToSend,
                 });
-                eventResponse.push(response); // Collect the response
+                eventResponse.push(response.data); // Collect the response
             }
 
             // Prepare data for updating the event status in the database

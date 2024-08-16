@@ -46,6 +46,7 @@ class Mail {
                 mailFromEmail: mailDetails.from || process.env.MAIL_FROM_ADDRESS,
                 mailToEmail: mailDetails.to,
                 mailBody: mailDetails.html,
+                mailSubject: mailDetails.subject,
                 mailType: "1"
             };
             await this.db.connect();  // Connect to the database

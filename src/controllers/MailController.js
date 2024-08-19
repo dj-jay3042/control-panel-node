@@ -167,7 +167,7 @@ class MailController {
         try {
             await db.connect(); // Connect to the database
 
-            const { mailId } = req.body.id; // Get the mail ID from the request body
+            const mailId  = req.body.id; // Get the mail ID from the request body
 
             await db.table(tables.TBL_MAILS)
                 .where("mailId", mailId) // Mark the email as read in the database

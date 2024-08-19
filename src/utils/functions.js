@@ -86,8 +86,49 @@ const date = (format = 'YYYY-MM-DD HH:mm:ss', dateInput = null) => {
     return formattedDate;
 }
 
+/**
+ * Converts formatted text into plain text by removing markdown-like formatting,
+ * decoding HTML entities, and normalizing whitespace.
+ *
+ * This function performs the following transformations:
+ * 1. Decodes HTML entities to their corresponding characters.
+ * 2. Removes markdown-like formatting characters such as asterisks (*) and underscores (_).
+ *    - Asterisks (*) are typically used for bold text.
+ *    - Underscores (_) are often used for italic text.
+ * 3. Replaces newline characters with a single space to produce a single-line output.
+ * 4. Trims any leading or trailing whitespace from the resulting text.
+ *
+ * Example:
+ * Given input: "*Hello Jay Chauhan!*\n\nThis is a test email sent to verify the email sending functionality of our\napplication."
+ * The function returns: "Hello Jay Chauhan! This is a test email sent to verify the email sending functionality of our application."
+ *
+ * @param {string} formattedText - The input text that may contain markdown-like formatting, HTML entities, and newline characters.
+ * @returns {string} - The plain text representation of the input, with formatting removed, HTML entities decoded, and whitespace normalized.
+ * @author Jay Chauhan
+ */
+const convertToPlainText = (formattedText) => {
+    const { decode } = require('html-entities');
+    
+    // Decode HTML entities to plain text
+    let text = decode(formattedText);
+    
+    // Remove markdown-like formatting (e.g., *bold* or _italic_)
+    text = text.replace(/\*([^*]+)\*/g, '$1') // Remove asterisks for bold
+               .replace(/_([^_]+)_/g, '$1'); // Remove underscores for italic
+    
+    // Replace newlines with spaces
+    text = text.replace(/\n+/g, ' ');
+  
+    // Trim any extra whitespace
+    text = text.trim();
+  
+    return text;
+  }
+  
+
 module.exports = {
     getUserByToken,
     base64Encode,
-    date
+    date,
+    convertToPlainText
 };

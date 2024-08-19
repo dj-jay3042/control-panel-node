@@ -3,7 +3,7 @@ const Email = require('../utils/mail/Mail'); // Import the Email utility for sen
 const Imap = require('../utils/mail/ImapClient'); // Import the ImapClient utility for fetching mails
 const MySQL = require('../utils/db/Mysql'); // Import the MySQL utility for database operations
 const tables = require('../config/tables'); // Import table configurations
-const { date } = require('../utils/functions'); // Utility function to get the current date
+const { date, convertToPlainText } = require('../utils/functions'); // Utility function to get the current date
 
 /**
  * @class MailController
@@ -67,6 +67,7 @@ class MailController {
                     mailToName: mail.to.value[0].name || null,
                     mailSubject: mail.subject || null,
                     mailBody: mail.html,
+                    mailText: convertToPlainText(mail.text),
                     mailType: "0"
                 };
                 await db.table(tables.TBL_MAILS).insert(insertDetails); // Insert email details into the database
@@ -112,6 +113,7 @@ class MailController {
                 mailFromName: fullName,
                 mailSubject: title,
                 mailBody: description,
+                mailText: displayDescription,
                 mailDate,
                 mailType
             } = mail;
@@ -130,22 +132,22 @@ class MailController {
             const attachments = []; // Assuming no attachments are provided
             const type = mailType === '0' ? 'inbox' : 'sent_mail'; // Adjust based on mailType
             const group = type === 'social' ? 'social' : 'personal';
-            const isImportant = false; // Set as needed
-            const isStar = false; // Set as needed
-            const isUnread = true; // Set as needed
+            const isImportant = false;
+            const isStar = false;
+            const isUnread = mail.mailIsRead == "0";
 
             // Return formatted mail object
             return {
                 id,
                 path,
                 firstName,
-                lastName: lastName || '', // Handle case where there's no last name
+                lastName: lastName || '',
                 emailFrom,
                 emailTo,
                 date: formattedDate,
                 time: formattedTime,
                 title,
-                displayDescription: "", // Simplified description for display
+                displayDescription,
                 type,
                 isImportant,
                 isStar,

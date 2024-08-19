@@ -3,6 +3,7 @@ const Email = require('../utils/mail/Mail'); // Import the Email utility for sen
 const Imap = require('../utils/mail/ImapClient'); // Import the ImapClient utility for fetching mails
 const MySQL = require('../utils/db/Mysql'); // Import the MySQL utility for database operations
 const tables = require('../config/tables'); // Import table configurations
+const { date } = require('../utils/functions'); // Utility function to get the current date
 
 /**
  * @class MailController
@@ -79,6 +80,81 @@ class MailController {
         } finally {
             await db.disconnect(); // Disconnect from the database
         }
+    }
+
+    static async getEmails(req, res) {
+        const db = new MySQL(); // Create a new instance of the MySQL utility
+
+        try {
+            await db.connect(); // Connect to the database
+
+            const emails = await db.table(tables.TBL_MAILS)
+                .select("*")
+                .get(); // Fetch all email records from the database
+
+            res.status(200).json(MailController.formatMailData(emails)); // Send the email data as a JSON response
+        } catch (error) {
+            const logger = new Logger(); // Create a new instance of the Logger utility
+            logger.write("Error in getting emails: " + error, "email/get"); // Log the error
+            res.status(500).json({ message: 'Oops! Something went wrong!' }); // Send an error response
+        } finally {
+            await db.disconnect(); // Disconnect from the database
+        }
+    }
+    // Function to format the mail data
+    static formatMailData(mailData) {
+        return mailData.map(mail => {
+            // Destructure and transform the data
+            var {
+                mailId: id,
+                mailFromEmail: email,
+                mailFromName: fullName,
+                mailSubject: title,
+                mailBody: description,
+                mailDate,
+                mailType
+            } = mail;
+
+            fullName = fullName || "";
+
+            // Extract first and last names
+            const [firstName, lastName] = fullName.split(' ');
+
+            // Format date and time
+            const formattedDate = date('yyyy-MM-dd');
+            const formattedTime = date('hh:mm a');
+
+            // Define static values and convert mailType to 'inbox' or 'social'
+            const path = ''; // Assuming no path is provided
+            const attachments = []; // Assuming no attachments are provided
+            const type = mailType === '0' ? 'inbox' : 'sent_mail'; // Adjust based on mailType
+            const group = type === 'social' ? 'social' : 'personal';
+            const isImportant = false; // Set as needed
+            const isStar = false; // Set as needed
+            const isUnread = true; // Set as needed
+
+            // Return formatted mail object
+            return {
+                id,
+                path,
+                firstName,
+                lastName: lastName || '', // Handle case where there's no last name
+                email,
+                date: formattedDate,
+                time: formattedTime,
+                title,
+                displayDescription: description, // Simplified description for display
+                type,
+                isImportant,
+                isStar,
+                group,
+                isUnread,
+                attachments,
+                description: `
+                <div dir="ltr">${description}</div>
+            `
+            };
+        });
     }
 }
 

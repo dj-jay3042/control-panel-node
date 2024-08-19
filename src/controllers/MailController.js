@@ -107,7 +107,8 @@ class MailController {
             // Destructure and transform the data
             var {
                 mailId: id,
-                mailFromEmail: email,
+                mailFromEmail: emailFrom,
+                mailToEmail: emailTo,
                 mailFromName: fullName,
                 mailSubject: title,
                 mailBody: description,
@@ -139,7 +140,8 @@ class MailController {
                 path,
                 firstName,
                 lastName: lastName || '', // Handle case where there's no last name
-                email,
+                emailFrom,
+                emailTo,
                 date: formattedDate,
                 time: formattedTime,
                 title,

@@ -125,7 +125,7 @@ class MailController {
 
             // Format date and time
             const formattedDate = date('YYYY-MM-DD', mailDate);
-            const formattedTime = date('hh:mm A',  mailDate);
+            const formattedTime = date('hh:mm A', mailDate);
 
             // Define static values and convert mailType to 'inbox' or 'social'
             const path = ''; // Assuming no path is provided
@@ -159,6 +159,28 @@ class MailController {
             `
             };
         });
+    }
+
+    static async markRead(req, res) {
+        const db = new MySQL(); // Create a new instance of the MySQL utility
+
+        try {
+            await db.connect(); // Connect to the database
+
+            const { mailId } = req.body.id; // Get the mail ID from the request body
+
+            await db.table(tables.TBL_MAILS)
+                .where("mailId", mailId) // Mark the email as read in the database
+                .update({ mailIsRead: "1" });
+
+            res.status(200).json({ message: 'Email marked as read successfully!' }); // Send a success response
+        } catch (error) {
+            const logger = new Logger(); // Create a new instance of the Logger utility
+            logger.write("Error in marking email as read: " + error, "email/mark"); // Log the error
+            res.status(500).json({ message: 'Oops! Something went wrong!' }); // Send an error response
+        } finally {
+            await db.disconnect();
+        }
     }
 }
 

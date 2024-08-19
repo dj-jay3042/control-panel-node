@@ -6,6 +6,7 @@ const MailController = require('../../controllers/MailController');
 router.post("/sendEmail", MailController.sendEmail);
 router.post("/fetchEmails", MailController.fetchEmails);
 router.get("/getEmails", MailController.getEmails);
+router.post("/markRead", MailController.markRead);
 
 // Export Router
 module.exports = router;

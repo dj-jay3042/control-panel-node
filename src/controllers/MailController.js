@@ -121,8 +121,8 @@ class MailController {
             const [firstName, lastName] = fullName.split(' ');
 
             // Format date and time
-            const formattedDate = date('yyyy-MM-dd');
-            const formattedTime = date('hh:mm a');
+            const formattedDate = date('YYYY-MM-DD');
+            const formattedTime = date('hh:mm A');
 
             // Define static values and convert mailType to 'inbox' or 'social'
             const path = ''; // Assuming no path is provided
@@ -143,7 +143,7 @@ class MailController {
                 date: formattedDate,
                 time: formattedTime,
                 title,
-                displayDescription: description, // Simplified description for display
+                displayDescription: "", // Simplified description for display
                 type,
                 isImportant,
                 isStar,
